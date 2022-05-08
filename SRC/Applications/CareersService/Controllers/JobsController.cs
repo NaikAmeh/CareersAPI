@@ -21,6 +21,9 @@ namespace CareerService.Controllers
         {
             try
             {
+                if(!ModelState.IsValid)
+                     return new HttpResponseMessage(HttpStatusCode.BadRequest);
+
                 _jobService.SaveJobDetails(model);
                 return new HttpResponseMessage(HttpStatusCode.Created);
             }
@@ -38,6 +41,9 @@ namespace CareerService.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest);
+
                 ListJobsResponse response = _jobService.ListJobs(model);
                 if (response == null)
                     return new HttpResponseMessage(HttpStatusCode.NoContent);
@@ -54,6 +60,9 @@ namespace CareerService.Controllers
         {
             try
             {
+                if (!ModelState.IsValid)
+                    return new HttpResponseMessage(HttpStatusCode.BadRequest);
+
                 bool isUpdateSuccess = _jobService.UpdateJobDetails(id, model);
                 if (isUpdateSuccess)
                     return new HttpResponseMessage(HttpStatusCode.OK);
